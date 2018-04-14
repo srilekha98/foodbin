@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1068716022033",
+    "firebase_url": "https://fudbin.firebaseio.com",
+    "project_id": "fudbin",
+    "storage_bucket": "fudbin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068716022033:android:93774b81f0386bf1",
+        "android_client_info": {
+          "package_name": "com.example.srilekha.foodbin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068716022033-jrkb1928va9d41bk6kqak3calf7lnj6l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAquU5uAOLL_T1CJHc2iSDcHJNo91wyLU0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="50px"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.srilekha.foodbin.HomeForm"
+    tools:showIn="@layout/app_bar_home_form">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+
+        android:textSize="10pt"></TextView>
+
+    <EditText
+        android:id="@+id/ename"
+        android:layout_width="271dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10px"
+        android:hint="name"
+        android:inputType="textEmailAddress"></EditText>
+
+    <TextView
+        android:id="@+id/cont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact"
+        android:textSize="10pt"></TextView>
+
+
+    <EditText
+        android:id="@+id/econt"
+        android:layout_width="271dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10px"
+        android:hint="Contact number"
+        android:inputType="textEmailAddress"></EditText>
+
+    <TextView
+        android:id="@+id/addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+
+        android:textSize="10pt"></TextView>
+
+    <EditText
+        android:id="@+id/eaddr"
+        android:layout_width="271dp"
+        android:layout_height="wrap_content"
+        android:hint="address"
+        android:layout_marginBottom="10px"
+        android:inputType="textEmailAddress"></EditText>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <!--Put form controls here-->
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veg"
+            android:layout_marginTop="10px"
+            android:layout_marginBottom="10px"
+            android:textSize="10pt"></TextView>
+
+        <Switch
+            android:id="@+id/stype"
+            android:layout_marginLeft="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/type1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Non-Veg"
+            android:layout_marginTop="10px"
+            android:layout_marginBottom="10px"
+            android:textSize="10pt"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <!--Put form controls here-->
+
+        <TextView
+            android:id="@+id/pack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Packed"
+            android:layout_marginTop="10px"
+            android:layout_marginBottom="10px"
+            android:textSize="10pt"></TextView>
+
+        <Switch
+            android:id="@+id/spack"
+            android:layout_marginLeft="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/pack1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unpacked"
+            android:layout_marginTop="10px"
+            android:layout_marginBottom="10px"
+            android:textSize="10pt"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/howmany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Serves"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="10px"
+        android:textSize="10pt"></TextView>
+
+    <Spinner
+        android:layout_marginTop="10px"
+        android:id="@+id/qspinner"
+        android:textColor="#FF0F00"
+        android:textSize="20sp"
+        android:gravity="left"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Submit" />
+
+    </LinearLayout>
+
+</LinearLayout>
