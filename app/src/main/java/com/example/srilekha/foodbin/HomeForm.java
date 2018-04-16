@@ -21,36 +21,52 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 public class HomeForm extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    EditText username;
+    EditText contact;
+    EditText address;
+    Button submit1;
+    Switch type;
+    Boolean stype;
+    Switch pack;Boolean spack;
+    DatabaseReference databaseOrders;
+    ArrayAdapter<Integer> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //DATABASE CONNECTION
+        databaseOrders = FirebaseDatabase.getInstance().getReference("fudbin");
         setContentView(R.layout.activity_home_form);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        EditText username = (EditText)findViewById(R.id.ename);
-
-        EditText contact = (EditText)findViewById(R.id.econt);
+        username = (EditText)findViewById(R.id.ename);
+        contact = (EditText)findViewById(R.id.econt);
+        address = (EditText)findViewById(R.id.eaddr);
+        submit1=(Button) findViewById(R.id.submit);
         // initiate a Switch
-        Switch type = (Switch) findViewById(R.id.stype);
+        type = (Switch) findViewById(R.id.stype);
+        // check current state of a Switch (true or false).
+        stype = type.isChecked();
+
+        // initiate a Switch
+       pack = (Switch) findViewById(R.id.spack);
 
 // check current state of a Switch (true or false).
-        Boolean stype = type.isChecked();
-
-        // initiate a Switch
-        Switch pack = (Switch) findViewById(R.id.spack);
-
-// check current state of a Switch (true or false).
-        Boolean spack = pack.isChecked();
+        spack = pack.isChecked();
 
 
         Spinner spinner = (Spinner) findViewById(R.id.qspinner);
@@ -68,20 +84,20 @@ public class HomeForm extends AppCompatActivity
         spinnerArray.add(8);
 
 // (3) create an adapter from the list
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(
+        adapter = new ArrayAdapter<Integer>(
                 this,
                 android.R.layout.simple_spinner_item,
                 spinnerArray
         );
         spinner.setAdapter(adapter);
 
-
-
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                // Code here executes on main thread after user presses button
+        submit1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //calling the method addArtist()
+                //the method is defined below
+                //this method is actually performing the write operation
+                addOrder();
             }
         });
 
@@ -174,4 +190,15 @@ public class HomeForm extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public void addOrder()
+    {
+        String dname = username.getText().toString();
+        String contact1 = contact.getText().toString();
+        String address1 = address.getText().toString();
+        String id = databaseOrders.push().getKey();
+        Order order1=new Order(dname,contact1,address1,address1);
+        databaseOrders.child(id).setValue(order1);
+        Toast.makeText(this, "order added", Toast.LENGTH_LONG).show();
+    }
+
 }
