@@ -1,6 +1,7 @@
 package com.example.srilekha.foodbin;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -46,10 +47,13 @@ public class HomeForm extends AppCompatActivity
     Switch pack;Boolean spack;
     DatabaseReference databaseOrders;
     ArrayAdapter<Integer> adapter;
+    String typeoffood,packing,noserves;
+    int dscore=10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //DATABASE CONNECTION
+        LoadPreferences();
         databaseOrders = FirebaseDatabase.getInstance().getReference("fudbin");
         setContentView(R.layout.activity_home_form);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -63,13 +67,27 @@ public class HomeForm extends AppCompatActivity
         type = (Switch) findViewById(R.id.stype);
         // check current state of a Switch (true or false).
         stype = type.isChecked();
-
+        if(stype)
+        {
+            typeoffood="Veg";
+        }
+        else
+        {
+            typeoffood="Non-Veg";
+        }
         // initiate a Switch
        pack = (Switch) findViewById(R.id.spack);
 
 // check current state of a Switch (true or false).
         spack = pack.isChecked();
-
+        if(stype)
+        {
+            packing="packed";
+        }
+        else
+        {
+            packing="unpacked";
+        }
 
         Spinner spinner = (Spinner) findViewById(R.id.qspinner);
         int a[] ={1,2,3,4,5,6,7,8};
@@ -100,6 +118,9 @@ public class HomeForm extends AppCompatActivity
                 //the method is defined below
                 //this method is actually performing the write operation
                 addOrder();
+                dscore=dscore+10;
+                SavePreferences("SCORE", Integer.toString(dscore));
+
             }
         });
 
@@ -118,7 +139,7 @@ public class HomeForm extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
                 ((TextView) selectedItemView).setTextColor(Color.BLACK);
-                q[0] =position;
+                noserves =Integer.toString(position);
             }
 
             @Override
@@ -185,6 +206,17 @@ public class HomeForm extends AppCompatActivity
            HomeForm.this.startActivity(intentMain);
 
         } else if (id == R.id.nav_gallery) {
+            Intent intentMain = new Intent(HomeForm.this ,
+                    Aboutus.class);
+            HomeForm.this.startActivity(intentMain);
+
+
+        }
+        else if (id == R.id.nav_feedback) {
+            Intent intentMain = new Intent(HomeForm.this ,
+                    Feedback.class);
+            HomeForm.this.startActivity(intentMain);
+
 
         }
 
@@ -201,6 +233,20 @@ public class HomeForm extends AppCompatActivity
         Order order1=new Order(dname,contact1,address1,address1,id);
         databaseOrders.child(id).setValue(order1);
         Toast.makeText(this, "order added", Toast.LENGTH_LONG).show();
+    }
+
+    private void SavePreferences(String key, String value){
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    private void LoadPreferences(){
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        dscore = Integer.valueOf(sharedPreferences.getString("SCORE", ""));
+
+
     }
 
 

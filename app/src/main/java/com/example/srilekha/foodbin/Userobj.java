@@ -23,5 +23,13 @@ public class Userobj {
             return true;
         return false;
     }
+    boolean emaileq(String email1)
+    {
+        if(email.equals(email1))
+        {
+            return true;
+        }
+        return false;
+    }
 
 }

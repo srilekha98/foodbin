@@ -26,6 +26,15 @@ public class Order {
         pack=pack1;
         serves=serves1; */
     }
+    public Order(String dname1,String contact1,String donoraddr1,String deliveryaddress1,String idd,
+                 String type1 , String pack1, String serves1)
+    {
+        dname=dname1;contact=contact1;donoraddr=donoraddr1;deliveryaddress=deliveryaddress1;
+        id=idd;
+        type=type1;
+        pack=pack1;
+        serves=serves1;
+    }
 
 
     public String getdname() {

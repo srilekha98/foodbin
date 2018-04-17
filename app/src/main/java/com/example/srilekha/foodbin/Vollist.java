@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -45,6 +46,16 @@ public class Vollist extends AppCompatActivity {
 
         setContentView(R.layout.vollist);
 
+        Button submit1=(Button) findViewById(R.id.submit);
+
+        submit1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentMain = new Intent(Vollist.this ,
+                        HomeForm.class);
+                Vollist.this.startActivity(intentMain);
+            }
+        });
         databaseOrders = FirebaseDatabase.getInstance().getReference("fudbin");
       //  Vollistitem t = ;
        // ArrayList<Vollistitem> order = new ArrayList<>();
@@ -85,7 +96,7 @@ public class Vollist extends AppCompatActivity {
 
                 alertDialogBuilder
                         .setCancelable(false)
-                        .setPositiveButton("OK",
+                        .setPositiveButton("ACCEPT",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
                                         Toast.makeText(getApplicationContext(), "Thank you :)", Toast.LENGTH_LONG).show();
@@ -99,7 +110,7 @@ public class Vollist extends AppCompatActivity {
 
                                     }
                                 })
-                        .setNegativeButton("Cancel",
+                        .setNegativeButton("DECLINE",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
                                         dialog.cancel();

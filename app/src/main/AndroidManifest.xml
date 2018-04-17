@@ -42,6 +42,13 @@
         </activity>
 
 
+        <activity
+            android:name=".Feedback"
+            android:label="feedback"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+
     </application>
 
 </manifest>

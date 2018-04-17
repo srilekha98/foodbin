@@ -11,6 +11,9 @@ public class Vollistitem {
     private String donoraddr;
     private String deliveryaddress;
     private String id;
+    private String type;
+    private String pack;
+    private String serves;
     public Vollistitem()
     {
 
@@ -20,6 +23,17 @@ public class Vollistitem {
         dname=dname1;contact=contact1;donoraddr=donoraddr1;deliveryaddress=deliveryaddress1;
         id=idd;
     }
+
+    public Vollistitem(String dname1,String contact1,String donoraddr1,String deliveryaddress1,String idd,
+                 String type1 , String pack1, String serves1)
+    {
+        dname=dname1;contact=contact1;donoraddr=donoraddr1;deliveryaddress=deliveryaddress1;
+        id=idd;
+        type=type1;
+        pack=pack1;
+        serves=serves1;
+    }
+
 
     public String getdname() {
         return dname;
@@ -54,6 +68,30 @@ public class Vollistitem {
     }
 
     public void setid(String headline) {
+        this.id = headline;
+    }
+
+    public String gettype() {
+        return type;
+    }
+
+    public void settype(String headline) {
+        this.type = headline;
+    }
+
+    public String getpack() {
+        return pack;
+    }
+
+    public void setpack(String headline) {
+        this.pack= headline;
+    }
+
+    public String getserves() {
+        return serves;
+    }
+
+    public void setserves(String headline) {
         this.id = headline;
     }
 
