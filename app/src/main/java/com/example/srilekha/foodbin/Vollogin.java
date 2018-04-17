@@ -18,6 +18,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
+
 import static android.R.id.edit;
 
 /**
@@ -29,12 +38,15 @@ public class Vollogin extends AppCompatActivity {
     String email="", password="";
     int signinflag=0;
     private FirebaseAuth mFirebaseAuth;
+    private DatabaseReference Userdb;
     private static final String TAG = "Vollogin";
+    List<Userobj> tracks;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        Userdb = FirebaseDatabase.getInstance().getReference("users");
+
         FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -45,12 +57,10 @@ public class Vollogin extends AppCompatActivity {
 
             }
         });
-
         LoadPreferences();
 
         final EditText edit =  (EditText) findViewById(R.id.usernamer);
         final EditText edit1 =  (EditText) findViewById(R.id.passwordr);
-
 
         Button login= (Button) findViewById(R.id.go1);
         login.setOnClickListener(new View.OnClickListener() {
@@ -58,47 +68,53 @@ public class Vollogin extends AppCompatActivity {
             public void onClick(View v) {
                 email=edit.getText().toString();
                 password=edit1.getText().toString();
+                final Userobj a=new Userobj(email,"",password);
                 SavePreferences("EMAIL", email);
                 SavePreferences("PASSWORD", password);
 
-              //  app.loginemail=email;
+                //  app.loginemail=email;
                 System.out.println("clicked, signinflag= "+signinflag);
-             //   Callapi task=new Callapi();
-            //    task.execute();
+                //   Callapi task=new Callapi();
+                //    task.execute();
                 // check if user is present
                 //if yes,,,then intent to vollist
-                mFirebaseAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(Vollogin.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
-                                    FirebaseUser user = mFirebaseAuth.getCurrentUser();
-                                    signinflag=1;
-                                    //updateUI(user);
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(Vollogin.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    //updateUI(null);
-                                }
-
-                                // [START_EXCLUDE]
-                                if (!task.isSuccessful()) {
-                                   // mStatusTextView.setText(R.string.auth_failed);
-                                }
-                                //hideProgressDialog();
-                                // [END_EXCLUDE]
+                Userdb.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //tracks.clear();
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            Userobj track = postSnapshot.getValue(Userobj.class);
+                            System.out.println("Entering fn");
+                            // tracks.add(track);
+                            if(track.ifequal(a))
+                            {
+                                System.out.println("Entering innerfn");
+                                signinflag=1;
+                                System.out.println("clicked, signinflagafter= "+signinflag);
+                                Intent intentMain = new Intent(Vollogin.this,
+                                        Vollist.class);
+                                Vollogin.this.startActivity(intentMain);
                             }
-                        });
+                        }
+                        if(signinflag==0)
+                        {
+                            Toast.makeText(Vollogin.this, "Invalid id or password", Toast.LENGTH_LONG).show();
+                        }
+                        // TrackList trackListAdapter = new TrackList(ArtistActivity.this, tracks);
+                        //listViewTracks.setAdapter(trackListAdapter);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                System.out.println("clicked, signinflag= "+signinflag);
+                    }
+                });
+
+
+
+
 
             }
         });
-
     }
 
     private void SavePreferences(String key, String value){
@@ -112,6 +128,7 @@ public class Vollogin extends AppCompatActivity {
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         email = sharedPreferences.getString("EMAIL", "");
         password = sharedPreferences.getString("PASSWORD", "");
+
 
     }
 }

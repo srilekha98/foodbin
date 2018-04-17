@@ -10,6 +10,16 @@ public class Vollistitem {
     private String contact;
     private String donoraddr;
     private String deliveryaddress;
+    private String id;
+    public Vollistitem()
+    {
+
+    }
+    public Vollistitem(String dname1,String contact1,String donoraddr1,String deliveryaddress1,String idd)
+    {
+        dname=dname1;contact=contact1;donoraddr=donoraddr1;deliveryaddress=deliveryaddress1;
+        id=idd;
+    }
 
     public String getdname() {
         return dname;
@@ -39,8 +49,17 @@ public class Vollistitem {
         return deliveryaddress;
     }
 
+    public String getid() {
+        return id;
+    }
+
+    public void setid(String headline) {
+        this.id = headline;
+    }
+
     public void setdeliveryaddress(String date) {
         this.deliveryaddress = date;
     }
+
 
 }

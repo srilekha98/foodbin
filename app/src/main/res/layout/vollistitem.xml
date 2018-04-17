@@ -6,6 +6,7 @@
     android:layout_marginRight="20dp"
     android:layout_marginBottom="20dp"
 
+
     android:background="@drawable/border">
 
     <RelativeLayout
@@ -15,12 +16,15 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
+
         >
 
         <TextView
             android:id="@+id/name"
+            android:layout_marginLeft="10dp"
             android:layout_width="240dp"
+            android:textColor="@color/DarkBlue"
             android:layout_height="wrap_content"
             android:text="Contrary to popular belief, Lorem Ipsum is not simply random text"
             android:textSize="18sp"
@@ -28,7 +32,9 @@
 
         <TextView
             android:id="@+id/contact"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
+            android:textColor="@color/RoyalBlue"
             android:layout_height="wrap_content"
             android:layout_below="@+id/deliveryaddress"
             android:layout_marginTop="10dp"
@@ -38,7 +44,9 @@
 
         <TextView
             android:id="@+id/donoraddress"
+            android:layout_marginLeft="10dp"
             android:layout_width="240dp"
+            android:textColor="@color/BlueViolet"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
             android:layout_marginTop="10dp"
@@ -47,7 +55,9 @@
 
         <TextView
             android:id="@+id/deliveryaddress"
+            android:layout_marginLeft="10dp"
             android:layout_width="240dp"
+            android:textColor="@color/BlueViolet"
             android:layout_height="wrap_content"
             android:layout_below="@+id/donoraddress"
             android:layout_marginTop="10dp"

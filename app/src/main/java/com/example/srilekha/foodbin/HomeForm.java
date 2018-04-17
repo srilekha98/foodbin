@@ -32,6 +32,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+
 public class HomeForm extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -196,9 +198,10 @@ public class HomeForm extends AppCompatActivity
         String contact1 = contact.getText().toString();
         String address1 = address.getText().toString();
         String id = databaseOrders.push().getKey();
-        Order order1=new Order(dname,contact1,address1,address1);
+        Order order1=new Order(dname,contact1,address1,address1,id);
         databaseOrders.child(id).setValue(order1);
         Toast.makeText(this, "order added", Toast.LENGTH_LONG).show();
     }
+
 
 }
