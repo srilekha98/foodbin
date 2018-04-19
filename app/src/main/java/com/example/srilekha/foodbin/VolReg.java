@@ -59,6 +59,17 @@ public class VolReg extends AppCompatActivity {
         final EditText passwordEditText =  (EditText) findViewById(R.id.password);
         final EditText usernameEditText =  (EditText) findViewById(R.id.displayname);
         Userdb = FirebaseDatabase.getInstance().getReference("users");
+        
+        FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intentMain = new Intent(VolReg.this,
+                        Vollogin.class);
+                VolReg.this.startActivity(intentMain);
+
+
+            }
+        });
 
 
         Button signup= (Button) findViewById(R.id.go);
