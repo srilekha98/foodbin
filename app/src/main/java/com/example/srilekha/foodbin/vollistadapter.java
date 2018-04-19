@@ -52,8 +52,8 @@ public class vollistadapter extends ArrayAdapter<Vollistitem> {
         TextView da = (TextView) listItem.findViewById(R.id.donoraddress);
         da.setText(currentMovie.getdonoraddr());
 
-        TextView dad = (TextView) listItem.findViewById(R.id.deliveryaddress);
-        dad.setText(currentMovie.getdeliveryaddress());
+        /*TextView dad = (TextView) listItem.findViewById(R.id.deliveryaddress);
+        dad.setText(currentMovie.getdeliveryaddress());*/
 
         return listItem;
     }
