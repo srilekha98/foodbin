@@ -79,15 +79,15 @@ public class VolReg extends AppCompatActivity {
                     Userdb.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            int flag=0;
+                            int flag=1;
                             //tracks.clear();
                             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                 Userobj track = postSnapshot.getValue(Userobj.class);
                                 System.out.println("Entering fn");
-                                // tracks.add(track);
-                                if(!track.emaileq(email1))
+                                // tacks.add(track);
+                                if(track.emaileq(email1))
                                 {
-                                    flag=1;
+                                    flag=0;
                                 }
                             }
                             if(flag==1){
