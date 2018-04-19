@@ -1,78 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="20dp"
-    android:layout_marginRight="20dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginLeft="3dp"
     android:layout_marginBottom="20dp"
 
 
     android:background="@drawable/border">
 
     <RelativeLayout
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
 
         >
 
         <TextView
+            android:id="@+id/name1"
+            android:layout_width="93dp"
+            android:layout_height="38dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:text="NAME"
+            android:textColor="@color/RoyalBlue"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/name"
-            android:layout_marginLeft="10dp"
-            android:layout_width="240dp"
-            android:textColor="@color/DarkBlue"
-            android:layout_height="wrap_content"
+            android:layout_width="261dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
             android:text="Contrary to popular belief, Lorem Ipsum is not simply random text"
-            android:textSize="18sp"
+            android:textColor="@color/RoyalBlue"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/contact1"
+            android:layout_width="99dp"
+            android:layout_height="39dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/contact"
+            android:text="CONTACT"
+            android:textColor="@color/RoyalBlue"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/contact"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:textColor="@color/RoyalBlue"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/deliveryaddress"
-            android:layout_marginTop="10dp"
+            android:layout_width="261dp"
+            android:layout_height="39dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="49dp"
             android:text="50 min ago"
+            android:textColor="@color/RoyalBlue"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/donoraddress1"
+            android:layout_width="99dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="108dp"
+            android:text="ADDRESS"
+            android:textColor="@color/RoyalBlue"
             android:textSize="18dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/donoraddress"
-            android:layout_marginLeft="10dp"
-            android:layout_width="240dp"
-            android:textColor="@color/BlueViolet"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/name"
-            android:layout_marginTop="10dp"
+            android:layout_width="257dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="105dp"
             android:text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form..."
-            android:textSize="14dp" />
+            android:textColor="@color/RoyalBlue"
+            android:textSize="18dp" />
 
-        <TextView
+        <!-- <TextView
             android:id="@+id/deliveryaddress"
-            android:layout_marginLeft="10dp"
-            android:layout_width="240dp"
-            android:textColor="@color/BlueViolet"
+            android:layout_width="257dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/donoraddress"
-            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="109dp"
             android:text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form..."
+            android:textColor="@color/BlueViolet"
             android:textSize="14dp" />
-
 
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="150dp"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/donoraddress"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter" />-->
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="167dp"
+            app:srcCompat="@drawable/bg_input_cursor" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+
 
 </LinearLayout>
