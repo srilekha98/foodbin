@@ -1,11 +1,18 @@
 package com.example.srilekha.foodbin;
 
+import android.*;
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,9 +32,13 @@ import android.widget.TextView;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,9 +47,11 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class HomeForm extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,LocationListener {
 
     EditText username;
+
+    private GoogleMap mMap;
     EditText contact;
     EditText address;
     Button submit1;
@@ -48,20 +61,100 @@ public class HomeForm extends AppCompatActivity
     DatabaseReference databaseOrders;
     ArrayAdapter<Integer> adapter;
     String typeoffood,packing,noserves;
+    private static final int REQUEST_CODE_PERMISSION = 1;
+
     int dscore=10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //DATABASE CONNECTION
-        LoadPreferences();
+        //DATABASE CONNECTIO
+
+
         databaseOrders = FirebaseDatabase.getInstance().getReference("fudbin");
         setContentView(R.layout.activity_home_form);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        dscore = Integer.valueOf(sharedPreferences.getString("SCORE", ""));
 
+        TextView tv1 = (TextView)findViewById(R.id.score);
+        tv1.setText(Integer.toString(dscore));
         username = (EditText)findViewById(R.id.ename);
         contact = (EditText)findViewById(R.id.econt);
         address = (EditText)findViewById(R.id.eaddr);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                /*checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)*/
+        != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this ,"Hello", Toast.LENGTH_SHORT).show();
+            System.out.println("No permission given");
+            /*ActivityCompat.requestPermissions(HomeForm.this,
+                    new String[]{mPermission,
+                    },
+                    REQUEST_CODE_PERMISSION);*/
+            ActivityCompat.requestPermissions(HomeForm.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_CODE_PERMISSION);
+            return;
+        }
+        GPSTracker gpsTracker = new GPSTracker(this);
+
+        if (gpsTracker.getIsGPSTrackingEnabled())
+        {
+
+
+
+            //Toast.makeText(this , "Longitude:" + stringLatitude + "\nLatitude:" + stringLongitude, Toast.LENGTH_SHORT).show();
+
+
+            String city = gpsTracker.getLocality(this);
+
+            String postalCode = gpsTracker.getPostalCode(this);
+
+            String addressLine = gpsTracker.getAddressLine(this);
+
+            TrackGps gps = new TrackGps(this);
+
+            double lat=0,lng=0;
+            if(gps.canGetLocation()){
+
+                lng = gps.getLongitude();
+                lat = gps .getLatitude();
+                String latitude = String.valueOf(lat);
+                String longitude = String.valueOf(lng);
+
+                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                try
+                {
+                    List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+                    Log.e("Addresses","-->"+addresses);
+                    city = addresses.get(0).getLocality().toString();
+                    addressLine=addresses.get(0).getAddressLine(0).toString();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+
+
+                Toast.makeText(getApplicationContext(),"Longitude:"+longitude+"\nLatitude:"+latitude,Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                gps.showSettingsAlert();
+            }
+                address.setText(addressLine + ", " + city, TextView.BufferType.EDITABLE);
+
+        }
+        else
+        {
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gpsTracker.showSettingsAlert();
+        }
+
+
         submit1=(Button) findViewById(R.id.submit);
         // initiate a Switch
         type = (Switch) findViewById(R.id.stype);
@@ -118,8 +211,13 @@ public class HomeForm extends AppCompatActivity
                 //the method is defined below
                 //this method is actually performing the write operation
                 addOrder();
+                SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+                dscore = Integer.valueOf(sharedPreferences.getString("SCORE", ""));
                 dscore=dscore+10;
+                TextView tv1 = (TextView)findViewById(R.id.score);
+                tv1.setText(Integer.toString(dscore));
                 SavePreferences("SCORE", Integer.toString(dscore));
+
 
             }
         });
@@ -248,6 +346,15 @@ public class HomeForm extends AppCompatActivity
 
 
     }
+    @Override
+    public void onLocationChanged(Location location) {
 
+        Double lat = location.getLatitude();
+        Double lng = location.getLongitude();
+
+        Log.i("Location info: Lat", lat.toString());
+        Log.i("Location info: Lng", lng.toString());
+
+    }
 
 }
