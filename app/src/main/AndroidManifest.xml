@@ -40,7 +40,11 @@
             android:label="Volunteerlogin"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
+         <activity
+            android:name=".Aboutus"
+            android:label="Userguide"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
 
         <activity
             android:name=".Feedback"
